@@ -1,6 +1,6 @@
-package cc.minetale.building_tools.commands.magma;
+package cc.minetale.buildingtools.commands.magma;
 
-import cc.minetale.building_tools.Utils;
+import cc.minetale.buildingtools.Utils;
 import cc.minetale.commonlib.util.MC;
 import cc.minetale.magma.MagmaReader;
 import cc.minetale.magma.MagmaUtils;

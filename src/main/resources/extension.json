@@ -1,5 +1,5 @@
 {
-  "entrypoint": "cc.minetale.building_tools.BuildingTools",
+  "entrypoint": "cc.minetale.buildingtools.BuildingTools",
   "name": "BuildingTools",
   "dependencies": ["Flame", "mLib"]
 }

@@ -1,4 +1,4 @@
-package cc.minetale.building_tools;
+package cc.minetale.buildingtools;
 
 import cc.minetale.magma.MagmaUtils;
 import cc.minetale.magma.MagmaWriter;
@@ -83,19 +83,19 @@ public class Selection {
         return Stream.iterate(
                 new Vec(getMinBlockX(), getMinBlockY(), getMinBlockZ()),
                 vec -> vec.blockZ() < getMaxBlockZ(),
-                vec -> {
-                    int nextX = vec.blockX() + 1;
+                prevVec -> {
+                    int nextX = prevVec.blockX() + 1;
 
-                    var nextY = vec.blockY();
+                    var nextY = prevVec.blockY();
                     if(nextX > getMaxBlockX()) {
                         nextY++;
                         nextX = getMinBlockX();
                     }
 
-                    var nextZ = vec.blockZ();
+                    var nextZ = prevVec.blockZ();
                     if(nextY > getMaxBlockY()) {
                         nextZ++;
-                        nextY = getMinBlockZ();
+                        nextY = getMinBlockY();
                     }
 
                     return new Vec(nextX, nextY, nextZ);

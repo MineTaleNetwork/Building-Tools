@@ -1,7 +1,7 @@
-package cc.minetale.building_tools.commands.selection;
+package cc.minetale.buildingtools.commands.selection;
 
-import cc.minetale.building_tools.Selection;
-import cc.minetale.building_tools.Utils;
+import cc.minetale.buildingtools.Selection;
+import cc.minetale.buildingtools.Utils;
 import cc.minetale.commonlib.util.MC;
 import net.kyori.adventure.text.Component;
 import net.minestom.server.command.CommandSender;

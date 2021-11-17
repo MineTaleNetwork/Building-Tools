@@ -1,11 +1,11 @@
-package cc.minetale.building_tools;
+package cc.minetale.buildingtools;
 
-import cc.minetale.building_tools.commands.ModeCommand;
-import cc.minetale.building_tools.commands.SetCommand;
-import cc.minetale.building_tools.commands.magma.LoadCommand;
-import cc.minetale.building_tools.commands.magma.SaveCommand;
-import cc.minetale.building_tools.commands.selection.PositionCommand;
-import cc.minetale.building_tools.commands.selection.SelectCommand;
+import cc.minetale.buildingtools.commands.ModeCommand;
+import cc.minetale.buildingtools.commands.SetCommand;
+import cc.minetale.buildingtools.commands.magma.LoadCommand;
+import cc.minetale.buildingtools.commands.magma.SaveCommand;
+import cc.minetale.buildingtools.commands.selection.PositionCommand;
+import cc.minetale.buildingtools.commands.selection.SelectCommand;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.entity.GameMode;
 import net.minestom.server.event.EventFilter;

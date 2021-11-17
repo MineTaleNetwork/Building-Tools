@@ -1,4 +1,4 @@
-package cc.minetale.building_tools;
+package cc.minetale.buildingtools;
 
 import net.minestom.server.command.CommandSender;
 import net.minestom.server.coordinate.Point;

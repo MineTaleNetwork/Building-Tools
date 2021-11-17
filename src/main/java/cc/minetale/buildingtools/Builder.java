@@ -1,4 +1,4 @@
-package cc.minetale.building_tools;
+package cc.minetale.buildingtools;
 
 import lombok.Getter;
 import lombok.Setter;

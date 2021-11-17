@@ -1,6 +1,6 @@
-package cc.minetale.building_tools.commands.magma;
+package cc.minetale.buildingtools.commands.magma;
 
-import cc.minetale.building_tools.Utils;
+import cc.minetale.buildingtools.Utils;
 import cc.minetale.commonlib.util.MC;
 import cc.minetale.magma.MagmaUtils;
 import net.kyori.adventure.text.Component;
@@ -42,6 +42,7 @@ public class SaveCommand extends Command {
 
         selection.save(location)
                 .thenAccept(success -> {
+                    //TODO Success is false even if it was successful
                     if(success) {
                         builder.sendMessage(MC.Chat.notificationMessage("Save", Component.text("Successfully saved to " + location, MC.CC.GREEN.getTextColor())));
                     } else {
