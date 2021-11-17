@@ -28,7 +28,7 @@ public class PositionCommand extends Command {
                 .setCallback(((sender, exception) -> {
                     var error = exception.getErrorCode();
                     if(error == ArgumentNumber.TOO_HIGH_ERROR || error == ArgumentNumber.TOO_LOW_ERROR) {
-                        sender.sendMessage(MC.Chat.notificationMessage("Position", Component.text("Argument 'type' needs to be either 1 or 2", MC.CC.GRAY.getTextColor())));
+                        sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Argument 'type' needs to be either 1 or 2", MC.CC.GRAY.getTextColor())));
                     }
                 }));
 
@@ -39,7 +39,7 @@ public class PositionCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        sender.sendMessage(MC.Chat.notificationMessage("Position", Component.text("Usage: //position <type> [position]", MC.CC.GRAY.getTextColor())));
+        sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Usage: //position <type> [position]", MC.CC.GRAY.getTextColor())));
     }
 
     private void setCurrentPosition(CommandSender sender, CommandContext context) {
@@ -88,7 +88,7 @@ public class PositionCommand extends Command {
             selection.setPos2(pos);
         }
 
-        builder.sendMessage(MC.Chat.notificationMessage("Position", Component.text("Successfully set " + (type == 1 ? "pos1" : "pos2") + ": " + pos, MC.CC.GREEN.getTextColor())));
+        builder.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Successfully set " + (type == 1 ? "pos1" : "pos2") + ": " + pos, MC.CC.GREEN.getTextColor())));
     }
 
 }

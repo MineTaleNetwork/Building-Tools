@@ -23,7 +23,7 @@ public class SetCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        sender.sendMessage(MC.Chat.notificationMessage("Set", Component.text("Usage: //set <block>", MC.CC.GRAY.getTextColor())));
+        sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Usage: //set <block>", MC.CC.GRAY.getTextColor())));
     }
 
     private void setSelection(CommandSender sender, CommandContext context) {
@@ -33,14 +33,14 @@ public class SetCommand extends Command {
         if(builder == null) { return; }
 
         if(!builder.isBuilderMode()) {
-            sender.sendMessage(MC.Chat.notificationMessage("Set", Component.text("You need to be in builder mode to execute this command!", MC.CC.RED.getTextColor())));
+            sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("You need to be in builder mode to execute this command!", MC.CC.RED.getTextColor())));
             return;
         }
 
         var selection = builder.getSelection();
 
         if(selection == null || selection.isIncomplete()) {
-            sender.sendMessage(MC.Chat.notificationMessage("Set", Component.text("You don't have a complete selection!", MC.CC.RED.getTextColor())));
+            sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("You don't have a complete selection!", MC.CC.RED.getTextColor())));
             return;
         }
 
@@ -55,7 +55,7 @@ public class SetCommand extends Command {
         long startTime = System.currentTimeMillis();
         batch.apply(instance, () -> {
             long totalTime = System.currentTimeMillis() - startTime;
-            sender.sendMessage(MC.Chat.notificationMessage("Set", Component.text("Successfully set " + selection.getSize() + " blocks (in " + totalTime + "ms) as " + block, MC.CC.GREEN.getTextColor())));
+            sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Successfully set " + selection.getSize() + " blocks (in " + totalTime + "ms) as " + block, MC.CC.GREEN.getTextColor())));
         });
     }
 

@@ -21,9 +21,9 @@ public class ModeCommand extends Command {
 
         var builderMode = builder.isBuilderMode();
         if(!builderMode) {
-            sender.sendMessage(MC.Chat.notificationMessage("BM", Component.text("Builder mode has been enabled", MC.CC.GREEN.getTextColor())));
+            sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Builder mode has been enabled", MC.CC.GREEN.getTextColor())));
         } else {
-            sender.sendMessage(MC.Chat.notificationMessage("BM", Component.text("Builder mode has been disabled", MC.CC.RED.getTextColor())));
+            sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Builder mode has been disabled", MC.CC.RED.getTextColor())));
         }
         builder.setBuilderMode(!builderMode);
     }

@@ -23,7 +23,7 @@ public class LoadCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        sender.sendMessage(MC.Chat.notificationMessage("Load", Component.text("Usage: //load <name>", MC.CC.GRAY.getTextColor())));
+        sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Usage: //load <name>", MC.CC.GRAY.getTextColor())));
     }
 
     private void loadExecutor(CommandSender sender, CommandContext context) {
@@ -33,7 +33,7 @@ public class LoadCommand extends Command {
         if(builder == null) { return; }
 
         if(!builder.isBuilderMode()) {
-            sender.sendMessage(MC.Chat.notificationMessage("Load", Component.text("You need to be in builder mode to execute this command!", MC.CC.RED.getTextColor())));
+            sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("You need to be in builder mode to execute this command!", MC.CC.RED.getTextColor())));
             return;
         }
 
