@@ -9,6 +9,7 @@ import net.minestom.server.coordinate.Vec;
 import net.minestom.server.entity.Player;
 import net.minestom.server.instance.Chunk;
 import net.minestom.server.instance.Instance;
+import org.bson.Document;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
@@ -42,6 +43,14 @@ public class Selection {
         this(pos1, pos2, null, null);
     }
 
+    private Selection() {}
+
+    public static Selection fromDocument(Document document) {
+        var selection = new Selection();
+        selection.load(document);
+        return selection;
+    }
+
     public void setPositions(Vec pos1, Vec pos2) {
         this.pos1 = pos1;
         this.pos2 = pos2;
@@ -67,19 +76,6 @@ public class Selection {
     }
 
     public Stream<Vec> getAllBlocks() {
-//        List<Vec> blocks = new ArrayList<>();
-//
-//        for(int x = getMinBlockX(); x <= getMaxBlockX(); x++) {
-//            for(int y = getMinBlockY(); y <= getMaxBlockY(); y++) {
-//                for(int z = getMinBlockZ(); z <= getMaxBlockZ(); z++) {
-//                    blocks.add(new Vec(x, y, z));
-//                }
-//            }
-//        }
-//
-//        return blocks;
-
-
         return Stream.iterate(
                 new Vec(getMinBlockX(), getMinBlockY(), getMinBlockZ()),
                 vec -> vec.blockZ() < getMaxBlockZ(),
@@ -216,6 +212,17 @@ public class Selection {
     public Chunk getMaxChunk() {
         if(this.instance == null) { return null; }
         return this.instance.getChunkAt(getMaxChunkPos());
+    }
+
+    private void load(Document document) {
+        this.pos1 = Utils.documentToVector(document.get("pos1", Document.class));
+        this.pos2 = Utils.documentToVector(document.get("pos2", Document.class));
+    }
+
+    public Document toDocument() {
+        return new Document()
+                .append("pos1", Utils.vectorToDocument(this.pos1))
+                .append("pos2", Utils.vectorToDocument(this.pos2));
     }
 
 }
