@@ -78,7 +78,7 @@ public class Selection {
     public Stream<Vec> getAllBlocks() {
         return Stream.iterate(
                 new Vec(getMinBlockX(), getMinBlockY(), getMinBlockZ()),
-                vec -> vec.blockZ() < getMaxBlockZ(),
+                vec -> vec.blockZ() <= getMaxBlockZ(),
                 prevVec -> {
                     int nextX = prevVec.blockX() + 1;
 
