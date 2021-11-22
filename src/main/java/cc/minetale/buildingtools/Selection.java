@@ -65,7 +65,7 @@ public class Selection {
 
         CompletableFuture<Boolean> future = new CompletableFuture<>();
 
-        MagmaUtils.load(this.instance, getMinChunkPos(), getMaxChunkPos())
+        MagmaUtils.load(this.instance, getMinBlockPos(), getMaxBlockPos())
                 .thenAccept(region -> future.complete(MagmaWriter.write(region, path)));
 
         return future;
