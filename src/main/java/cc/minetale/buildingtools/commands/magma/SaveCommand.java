@@ -4,6 +4,7 @@ import cc.minetale.buildingtools.Utils;
 import cc.minetale.commonlib.util.MC;
 import cc.minetale.magma.MagmaUtils;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.command.CommandSender;
 import net.minestom.server.command.builder.Command;
 import net.minestom.server.command.builder.CommandContext;
@@ -22,7 +23,8 @@ public class SaveCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Usage: //save <name>", MC.CC.GRAY.getTextColor())));
+        sender.sendMessage(MC.notificationMessage("BT",
+                Component.text("Usage: //save <name>", NamedTextColor.GRAY)));
     }
 
     private void saveExecutor(CommandSender sender, CommandContext context) {
@@ -34,7 +36,8 @@ public class SaveCommand extends Command {
         var selection = builder.getSelection();
 
         if(selection == null || selection.isIncomplete()) {
-            sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("You don't have a complete selection!", MC.CC.RED.getTextColor())));
+            sender.sendMessage(MC.notificationMessage("BT",
+                    Component.text("You don't have a complete selection!", NamedTextColor.RED)));
             return;
         }
 
@@ -44,9 +47,11 @@ public class SaveCommand extends Command {
                 .thenAccept(success -> {
                     //TODO Success is false even if it was successful
                     if(success) {
-                        builder.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Successfully saved to " + location, MC.CC.GREEN.getTextColor())));
+                        builder.sendMessage(MC.notificationMessage("BT",
+                                Component.text("Successfully saved to " + location, NamedTextColor.GREEN)));
                     } else {
-                        builder.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Couldn't save to " + location, MC.CC.RED.getTextColor())));
+                        builder.sendMessage(MC.notificationMessage("BT",
+                                Component.text("Couldn't save to " + location, NamedTextColor.RED)));
                     }
                 });
     }

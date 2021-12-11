@@ -5,6 +5,7 @@ import cc.minetale.commonlib.util.MC;
 import cc.minetale.magma.MagmaReader;
 import cc.minetale.magma.MagmaUtils;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.command.CommandSender;
 import net.minestom.server.command.builder.Command;
 import net.minestom.server.command.builder.CommandContext;
@@ -23,7 +24,8 @@ public class LoadCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Usage: //load <name>", MC.CC.GRAY.getTextColor())));
+        sender.sendMessage(MC.notificationMessage("BT",
+                Component.text("Usage: //load <name>", NamedTextColor.GRAY)));
     }
 
     private void loadExecutor(CommandSender sender, CommandContext context) {
@@ -33,7 +35,8 @@ public class LoadCommand extends Command {
         if(builder == null) { return; }
 
         if(!builder.isBuilderMode()) {
-            sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("You need to be in builder mode to execute this command!", MC.CC.RED.getTextColor())));
+            sender.sendMessage(MC.notificationMessage("BT",
+                    Component.text("You need to be in builder mode to execute this command!", NamedTextColor.RED)));
             return;
         }
 

@@ -5,6 +5,7 @@ import cc.minetale.buildingtools.Selection;
 import cc.minetale.buildingtools.Utils;
 import cc.minetale.commonlib.util.MC;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.command.CommandSender;
 import net.minestom.server.command.builder.Command;
 import net.minestom.server.command.builder.CommandContext;
@@ -28,7 +29,8 @@ public class PositionCommand extends Command {
                 .setCallback(((sender, exception) -> {
                     var error = exception.getErrorCode();
                     if(error == ArgumentNumber.TOO_HIGH_ERROR || error == ArgumentNumber.TOO_LOW_ERROR) {
-                        sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Argument 'type' needs to be either 1 or 2", MC.CC.GRAY.getTextColor())));
+                        sender.sendMessage(MC.notificationMessage("BT",
+                                Component.text("Argument 'type' needs to be either 1 or 2", NamedTextColor.GRAY)));
                     }
                 }));
 
@@ -39,7 +41,8 @@ public class PositionCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        sender.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Usage: //position <type> [position]", MC.CC.GRAY.getTextColor())));
+        sender.sendMessage(MC.notificationMessage("BT",
+                Component.text("Usage: //position <type> [position]", NamedTextColor.GRAY)));
     }
 
     private void setCurrentPosition(CommandSender sender, CommandContext context) {
@@ -88,7 +91,8 @@ public class PositionCommand extends Command {
             selection.setPos2(pos);
         }
 
-        builder.sendMessage(MC.Chat.notificationMessage("BT", Component.text("Successfully set " + (type == 1 ? "pos1" : "pos2") + ": " + pos, MC.CC.GREEN.getTextColor())));
+        builder.sendMessage(MC.notificationMessage("BT",
+                Component.text("Successfully set " + (type == 1 ? "pos1" : "pos2") + ": " + pos, NamedTextColor.GREEN)));
     }
 
 }
