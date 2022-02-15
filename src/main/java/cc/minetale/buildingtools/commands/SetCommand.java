@@ -1,7 +1,7 @@
 package cc.minetale.buildingtools.commands;
 
-import cc.minetale.buildingtools.Utils;
-import cc.minetale.commonlib.util.MC;
+import cc.minetale.buildingtools.Builder;
+import cc.minetale.commonlib.util.Message;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.command.CommandSender;
@@ -24,18 +24,18 @@ public class SetCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        sender.sendMessage(MC.notificationMessage("BT",
+        sender.sendMessage(Message.notification("BT",
                 Component.text("Usage: //set <block>", NamedTextColor.GRAY)));
     }
 
     private void setSelection(CommandSender sender, CommandContext context) {
         Block block = context.get("block");
 
-        var builder = Utils.getSenderAsBuilder(sender);
+        var builder = Builder.fromSender(sender);
         if(builder == null) { return; }
 
         if(!builder.isBuilderMode()) {
-            sender.sendMessage(MC.notificationMessage("BT",
+            sender.sendMessage(Message.notification("BT",
                     Component.text("You need to be in builder mode to execute this command!", NamedTextColor.RED)));
             return;
         }
@@ -43,7 +43,7 @@ public class SetCommand extends Command {
         var selection = builder.getSelection();
 
         if(selection == null || selection.isIncomplete()) {
-            sender.sendMessage(MC.notificationMessage("BT",
+            sender.sendMessage(Message.notification("BT",
                     Component.text("You don't have a complete selection!", NamedTextColor.RED)));
             return;
         }
@@ -51,15 +51,13 @@ public class SetCommand extends Command {
         var instance = builder.getInstance();
         if(instance == null) { return; }
 
-        var blocks = selection.getAllBlocks().parallel();
+        var batch = new AbsoluteBlockBatch();
+        selection.getAllBlocks().forEach(vec -> batch.setBlock(vec, block));
 
-        AbsoluteBlockBatch batch = new AbsoluteBlockBatch();
-        blocks.forEach(vec -> batch.setBlock(vec, block));
-
-        long startTime = System.currentTimeMillis();
+        var startTime = System.currentTimeMillis();
         batch.apply(instance, () -> {
-            long totalTime = System.currentTimeMillis() - startTime;
-            sender.sendMessage(MC.notificationMessage("BT",
+            var totalTime = System.currentTimeMillis() - startTime;
+            sender.sendMessage(Message.notification("BT",
                     Component.text("Successfully set " + selection.getSize() +
                             " blocks (in " + totalTime + "ms) as " + block, NamedTextColor.GREEN)));
         });

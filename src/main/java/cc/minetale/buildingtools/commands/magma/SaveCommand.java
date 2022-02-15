@@ -1,7 +1,7 @@
 package cc.minetale.buildingtools.commands.magma;
 
-import cc.minetale.buildingtools.Utils;
-import cc.minetale.commonlib.util.MC;
+import cc.minetale.buildingtools.Builder;
+import cc.minetale.commonlib.util.Message;
 import cc.minetale.magma.MagmaUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -23,20 +23,20 @@ public class SaveCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        sender.sendMessage(MC.notificationMessage("BT",
+        sender.sendMessage(Message.notification("BT",
                 Component.text("Usage: //save <name>", NamedTextColor.GRAY)));
     }
 
     private void saveExecutor(CommandSender sender, CommandContext context) {
         String name = context.get("name");
 
-        var builder = Utils.getSenderAsBuilder(sender);
+        var builder = Builder.fromSender(sender);
         if(builder == null) { return; }
 
         var selection = builder.getSelection();
 
         if(selection == null || selection.isIncomplete()) {
-            sender.sendMessage(MC.notificationMessage("BT",
+            sender.sendMessage(Message.notification("BT",
                     Component.text("You don't have a complete selection!", NamedTextColor.RED)));
             return;
         }
@@ -47,10 +47,10 @@ public class SaveCommand extends Command {
                 .thenAccept(success -> {
                     //TODO Success is false even if it was successful
                     if(success) {
-                        builder.sendMessage(MC.notificationMessage("BT",
+                        builder.sendMessage(Message.notification("BT",
                                 Component.text("Successfully saved to " + location, NamedTextColor.GREEN)));
                     } else {
-                        builder.sendMessage(MC.notificationMessage("BT",
+                        builder.sendMessage(Message.notification("BT",
                                 Component.text("Couldn't save to " + location, NamedTextColor.RED)));
                     }
                 });

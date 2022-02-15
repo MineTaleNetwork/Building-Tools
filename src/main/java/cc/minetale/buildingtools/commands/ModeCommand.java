@@ -1,7 +1,7 @@
 package cc.minetale.buildingtools.commands;
 
-import cc.minetale.buildingtools.Utils;
-import cc.minetale.commonlib.util.MC;
+import cc.minetale.buildingtools.Builder;
+import cc.minetale.commonlib.util.Message;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.command.CommandSender;
@@ -17,17 +17,18 @@ public class ModeCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        var builder = Utils.getSenderAsBuilder(sender);
+        var builder = Builder.fromSender(sender);
         if(builder == null) { return; }
 
         var builderMode = builder.isBuilderMode();
         if(!builderMode) {
-            sender.sendMessage(MC.notificationMessage("BT",
+            sender.sendMessage(Message.notification("BT",
                     Component.text("Builder mode has been enabled", NamedTextColor.GREEN)));
         } else {
-            sender.sendMessage(MC.notificationMessage("BT",
+            sender.sendMessage(Message.notification("BT",
                     Component.text("Builder mode has been disabled", NamedTextColor.RED)));
         }
+
         builder.setBuilderMode(!builderMode);
     }
 

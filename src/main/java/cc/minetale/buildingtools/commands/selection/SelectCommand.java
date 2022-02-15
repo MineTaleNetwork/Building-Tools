@@ -1,8 +1,8 @@
 package cc.minetale.buildingtools.commands.selection;
 
+import cc.minetale.buildingtools.Builder;
 import cc.minetale.buildingtools.Selection;
-import cc.minetale.buildingtools.Utils;
-import cc.minetale.commonlib.util.MC;
+import cc.minetale.commonlib.util.Message;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.command.CommandSender;
@@ -25,7 +25,7 @@ public class SelectCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        sender.sendMessage(MC.notificationMessage("BT",
+        sender.sendMessage(Message.notification("BT",
                 Component.text("Usage: //select <pos1> <pos2>", NamedTextColor.GRAY)));
     }
 
@@ -33,7 +33,7 @@ public class SelectCommand extends Command {
         RelativeVec pos1 = context.get("pos1");
         RelativeVec pos2 = context.get("pos2");
 
-        var builder = Utils.getSenderAsBuilder(sender);
+        var builder = Builder.fromSender(sender);
         if(builder == null) { return; }
 
         var selection = builder.getSelection();
@@ -55,7 +55,7 @@ public class SelectCommand extends Command {
             selection.setInstance(instance);
         }
 
-        sender.sendMessage(MC.notificationMessage("BT",
+        sender.sendMessage(Message.notification("BT",
                 Component.text("Successfully created a selection with size of " + selection.getSize() +
                         " at pos1: " + absPos1 + " pos2: " + absPos2, NamedTextColor.GREEN)));
     }

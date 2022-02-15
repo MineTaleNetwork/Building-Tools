@@ -2,8 +2,8 @@ package cc.minetale.buildingtools.commands.selection;
 
 import cc.minetale.buildingtools.Builder;
 import cc.minetale.buildingtools.Selection;
-import cc.minetale.buildingtools.Utils;
-import cc.minetale.commonlib.util.MC;
+import cc.minetale.commonlib.util.Message;
+import cc.minetale.mlib.util.DocumentUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.command.CommandSender;
@@ -23,16 +23,14 @@ public class PositionCommand extends Command {
 
         setDefaultExecutor(this::defaultExecutor);
 
-        var type = new ArgumentInteger("type");
-
-        type.between(1,2)
-                .setCallback(((sender, exception) -> {
-                    var error = exception.getErrorCode();
-                    if(error == ArgumentNumber.TOO_HIGH_ERROR || error == ArgumentNumber.TOO_LOW_ERROR) {
-                        sender.sendMessage(MC.notificationMessage("BT",
-                                Component.text("Argument 'type' needs to be either 1 or 2", NamedTextColor.GRAY)));
-                    }
-                }));
+        var type = new ArgumentInteger("type").between(1,2);
+        type.setCallback(((sender, exception) -> {
+            var error = exception.getErrorCode();
+            if(error == ArgumentNumber.TOO_HIGH_ERROR || error == ArgumentNumber.TOO_LOW_ERROR) {
+                sender.sendMessage(Message.notification("BT",
+                        Component.text("Argument 'type' needs to be either 1 or 2", NamedTextColor.GRAY)));
+            }
+        }));
 
         var position = new ArgumentRelativeBlockPosition("position");
 
@@ -41,27 +39,27 @@ public class PositionCommand extends Command {
     }
 
     private void defaultExecutor(CommandSender sender, CommandContext context) {
-        sender.sendMessage(MC.notificationMessage("BT",
+        sender.sendMessage(Message.notification("BT",
                 Component.text("Usage: //position <type> [position]", NamedTextColor.GRAY)));
     }
 
     private void setCurrentPosition(CommandSender sender, CommandContext context) {
         int type = context.get("type");
 
-        var builder = Utils.getSenderAsBuilder(sender);
+        var builder = Builder.fromSender(sender);
         if(builder == null) { return; }
 
         var selection = builder.getSelection();
         var instance = builder.getInstance();
 
-        setSelectionPosition(type, builder, selection, Utils.toBlockVector(builder.getPosition()), instance);
+        setSelectionPosition(type, builder, selection, DocumentUtil.toBlockVector(builder.getPosition()), instance);
     }
 
     private void setSpecifiedPosition(CommandSender sender, CommandContext context) {
         int type = context.get("type");
         RelativeVec relativePos = context.get("position");
 
-        var builder = Utils.getSenderAsBuilder(sender);
+        var builder = Builder.fromSender(sender);
         if(builder == null) { return; }
 
         var absolutePos = relativePos.from(builder);
@@ -91,7 +89,7 @@ public class PositionCommand extends Command {
             selection.setPos2(pos);
         }
 
-        builder.sendMessage(MC.notificationMessage("BT",
+        builder.sendMessage(Message.notification("BT",
                 Component.text("Successfully set " + (type == 1 ? "pos1" : "pos2") + ": " + pos, NamedTextColor.GREEN)));
     }
 
